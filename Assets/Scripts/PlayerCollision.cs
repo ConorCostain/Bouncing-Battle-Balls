@@ -23,9 +23,9 @@ public class PlayerCollision : MonoBehaviour {
 
 			displacement = displacement.normalized;
 
-			Vector2 player2v = displacement * bounciness * rb.velocity.x * rb.velocity.x;
+			Vector2 player2v = displacement * bounciness * rb.velocity.x;
 
-			Vector2 player1v = -displacement * bounciness * rbc.velocity.x * rbc.velocity.x;
+			Vector2 player1v = -displacement * bounciness * rbc.velocity.x;
 
 			//When using Velocity use bounciness around 1.75
 			rb.velocity = player1v;
