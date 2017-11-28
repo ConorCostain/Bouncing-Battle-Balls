@@ -38,10 +38,8 @@ public class player2movement : MonoBehaviour
 	{
 		Movement.movementFixedUpdate(moveLeft, moveRight, moveJump, turnSpeed, maxSpeed, acceleration, gravityMultiplier, jumpPower, rb);
 
-		if(rb.position.y < -15)
-		{
-			gm.EndGame(2);
-		}
+		if (rb.position.y < -5)
+			PlaySessionManager.ins.RoundOver(1);
 	}
 
 	

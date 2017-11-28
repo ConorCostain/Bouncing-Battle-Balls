@@ -8,4 +8,9 @@ public class MenuScript : MonoBehaviour {
 	{
 		PlaySessionManager.ins.LoadScene(sceneName);
 	}
+
+	public void LevelMixup()
+	{
+		PlaySessionManager.ins.LevelMixup();
+	}
 }

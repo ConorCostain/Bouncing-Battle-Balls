@@ -32,14 +32,17 @@ public class player1movement : MonoBehaviour {
 		moveRight = Input.GetKey("d");
 		moveLeft = Input.GetKey("a");
 
+		if (Input.GetKey("escape"))
+			PlaySessionManager.ins.LoadScene("MainMenu");
+
 	}
 
 	void FixedUpdate()
 	{
 		Movement.movementFixedUpdate(moveLeft, moveRight, moveJump, turnSpeed, maxSpeed, acceleration, gravityMultiplier, jumpPower, rb);
 
-		if (rb.position.y < -15)
-			gm.EndGame(1);
+		if (rb.position.y < -5)
+			PlaySessionManager.ins.RoundOver(2);
 		
 	}
 
