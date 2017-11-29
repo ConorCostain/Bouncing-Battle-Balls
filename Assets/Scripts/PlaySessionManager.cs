@@ -7,6 +7,7 @@ using TMPro;
 public class PlaySessionManager : MonoBehaviour {
 
 	public static PlaySessionManager ins;
+	public Color[] colourPallete;
 	private static bool randomLevels = false;
 	private static bool roundOver = false;
 	private TMP_Text player1Text;
@@ -37,9 +38,10 @@ public class PlaySessionManager : MonoBehaviour {
 	{
 		if (s.name.Contains("Level"))
 		{
+			// Reset Round Over bool
 			roundOver = false;
 
-			
+			//Player Score System
 
 			TMP_Text[] scores = FindObjectsOfType<TMP_Text>();
 
@@ -56,6 +58,12 @@ public class PlaySessionManager : MonoBehaviour {
 
 			player1Text.text = player1Score.ToString();
 			player2Text.text = player2Score.ToString();
+
+			// Camera Background Colour Change
+			Camera camera = FindObjectOfType<Camera>();
+
+			Color colour = colourPallete[(int)Random.Range(0, colourPallete.Length -1)];
+			camera.backgroundColor = colour;
 
 		}
 	}
