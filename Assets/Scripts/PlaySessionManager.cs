@@ -62,7 +62,7 @@ public class PlaySessionManager : MonoBehaviour {
 			// Camera Background Colour Change
 			Camera camera = FindObjectOfType<Camera>();
 
-			Color colour = colourPallete[(int)Random.Range(0, colourPallete.Length -1)];
+			Color colour = colourPallete[(int)Random.Range(0, colourPallete.Length)];
 			camera.backgroundColor = colour;
 
 		}
