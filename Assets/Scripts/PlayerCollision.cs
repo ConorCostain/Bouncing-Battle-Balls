@@ -23,17 +23,17 @@ public class PlayerCollision : MonoBehaviour {
 
 			displacement = displacement.normalized;
 
-			Vector2 player2v = displacement * bounciness * rb.velocity.x;
+			Vector2 player2v = displacement * bounciness * rb.velocity.x * rb.velocity.x;
 
-			Vector2 player1v = -displacement * bounciness * rbc.velocity.x;
+			Vector2 player1v = -displacement * bounciness * rbc.velocity.x * rbc.velocity.x;
 
 			//When using Velocity use bounciness around 1.75
-			rb.velocity = player1v;
-			rbc.velocity = player2v;
+			//rb.velocity = player1v;
+			//rbc.velocity = player2v;
 
 			//When using force use bounciness around 30
-			//rb.AddForce(player1v);
-			//rbc.AddForce(player2v);
+			rb.AddForce(player1v);
+			rbc.AddForce(player2v);
 		}
 	}
 

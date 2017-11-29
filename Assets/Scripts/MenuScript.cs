@@ -13,4 +13,9 @@ public class MenuScript : MonoBehaviour {
 	{
 		PlaySessionManager.ins.LevelMixup();
 	}
+
+	public void Quit()
+	{
+		Application.Quit();
+	}
 }

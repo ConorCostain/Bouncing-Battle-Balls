@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class PlaySessionManager : MonoBehaviour {
 
 	public static PlaySessionManager ins;
 	private static bool randomLevels = false;
 	private static bool roundOver = false;
+	private TMP_Text player1Text;
+	private TMP_Text player2Text;
+	private int player1Score = 0;
+	private int player2Score = 0;
 
 	// Singleton Pattern, OnSceneLoad Method Added
 	private void Awake()
@@ -32,6 +38,25 @@ public class PlaySessionManager : MonoBehaviour {
 		if (s.name.Contains("Level"))
 		{
 			roundOver = false;
+
+			
+
+			TMP_Text[] scores = FindObjectsOfType<TMP_Text>();
+
+			if(scores[0].name == "Player1Score")
+			{
+				player1Text = scores[0];
+				player2Text = scores[1];
+			}
+			else
+			{
+				player1Text = scores[1];
+				player2Text = scores[0];
+			}
+
+			player1Text.text = player1Score.ToString();
+			player2Text.text = player2Score.ToString();
+
 		}
 	}
 
@@ -46,7 +71,14 @@ public class PlaySessionManager : MonoBehaviour {
 	{
 		if (!roundOver)
 		{
-
+			if(playerNumber == 1)
+			{
+				player1Score++;
+			}
+			else if(playerNumber == 2)
+			{
+				player2Score++;
+			}
 			Debug.Log("Player" + playerNumber + "wins");
 			roundOver = true;
 			Invoke("LoadLevel", 1f); 
