@@ -14,7 +14,7 @@ public class player2movement : MonoBehaviour
 	public float gravityMultiplier = 2.5f;
 	public float turnSpeed = 5f;
 
-	private bool inAir = true;
+	
 	private bool moveLeft;
 	private bool moveRight;
 	private bool moveJump;

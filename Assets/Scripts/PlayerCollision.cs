@@ -6,10 +6,23 @@ public class PlayerCollision : MonoBehaviour {
 
 	Rigidbody2D rb;
 	public float bounciness = 1.75f;
+	public static PlayerCollision instance;
+	public bool inCollision = false;
 
 	private void Awake()
 	{
 		rb = gameObject.GetComponent<Rigidbody2D>();
+
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if(instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -17,6 +30,7 @@ public class PlayerCollision : MonoBehaviour {
 	
 		if (collision.collider.tag == "Player")
 		{
+			inCollision = true;
 			Rigidbody2D rbc = collision.collider.GetComponent<Rigidbody2D>();
 
 			Vector2 displacement = rbc.transform.position - rb.transform.position;
@@ -35,6 +49,11 @@ public class PlayerCollision : MonoBehaviour {
 			rb.AddForce(player1v);
 			rbc.AddForce(player2v);
 		}
+	}
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.collider.tag == "Player")
+			inCollision = false;
 	}
 
 }
