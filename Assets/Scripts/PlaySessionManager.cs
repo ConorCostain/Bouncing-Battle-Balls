@@ -73,8 +73,11 @@ public class PlaySessionManager : MonoBehaviour {
 	public void LoadScene(string sceneName)
 	{
 		
+		randomLevels = false;
 		SceneManager.LoadScene(sceneName);
 	}
+
+	
 	public void RoundOver(int playerNumber)
 	{
 		if (!roundOver)

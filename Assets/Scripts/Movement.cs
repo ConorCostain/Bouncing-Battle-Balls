@@ -7,12 +7,12 @@ public static class Movement
 		if (moveLeft)
 		{
 			if (rb.velocity.x > -maxSpeed)
-				rb.AddForce(Vector2.left * acceleration * Time.deltaTime * (rb.velocity.x > 0 ? turnSpeed : 1));
+				rb.AddForce(Vector2.left * acceleration * Time.fixedDeltaTime * (rb.velocity.x > 0 ? turnSpeed : 1));
 		}
 		if (moveRight)
 		{
 			if (rb.velocity.x < maxSpeed)
-				rb.AddForce(Vector2.right * acceleration * Time.deltaTime * (rb.velocity.x < 0 ? turnSpeed : 1));
+				rb.AddForce(Vector2.right * acceleration * Time.fixedDeltaTime * (rb.velocity.x < 0 ? turnSpeed : 1));
 		}
 		if (moveJump && (rb.velocity.y == 0 || PlayerCollision.instance.inCollision))
 		{
