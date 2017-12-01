@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class LevelSelect : MonoBehaviour {
+public class LevelSelect : MonoBehaviour
+{
 
 	public Vector2 startPosistion;
 	public float horizontalSpacing;
@@ -31,16 +32,16 @@ public class LevelSelect : MonoBehaviour {
 		}
 		Debug.Log(levels.Count.ToString());
 
-		for(int i = 0; i < levels.Count; i++)
+		for (int i = 0; i < levels.Count; i++)
 		{
 			currentPosistion = startPosistion + Vector2.right * horizontalSpacing * i;
-			
-			if(currentPosistion.x >= startPosistion.x * -1) // needs fix
+
+			if (currentPosistion.x >= startPosistion.x * -1) // needs fix
 			{
 				PosistionCalc();
 			}
 			Debug.Log(currentPosistion.x.ToString() + ", " + currentPosistion.y.ToString());
-			if(i % 2 == 0)
+			if (i % 2 == 0)
 			{
 				Debug.Log("Red");
 				ButtonSetup(currentPosistion, RedButton, i + 1, levels[i]);
@@ -56,7 +57,7 @@ public class LevelSelect : MonoBehaviour {
 
 	private void PosistionCalc()
 	{
-		currentPosistion = Vector2.right * (currentPosistion.x + (2 * startPosistion.x)) + 
+		currentPosistion = Vector2.right * (currentPosistion.x + (2 * startPosistion.x)) +
 			Vector2.up * (currentPosistion.y + verticalSpacing);
 		if (currentPosistion.x >= startPosistion.x * -1)
 		{
@@ -89,6 +90,6 @@ public class LevelSelect : MonoBehaviour {
 		PlaySessionManager.ins.LoadScene(sceneName);
 	}
 
-	
+
 
 }

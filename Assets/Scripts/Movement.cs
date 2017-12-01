@@ -2,7 +2,8 @@
 
 public static class Movement
 {
-	public static void movementFixedUpdate(bool moveLeft, bool moveRight, bool moveJump, float turnSpeed, float maxSpeed, float acceleration, float gravityMultiplier, float jumpPower, Rigidbody2D rb)
+	public static void movementFixedUpdate(bool moveLeft, bool moveRight, bool moveJump, float turnSpeed,
+		float maxSpeed, float acceleration, float gravityMultiplier, float jumpPower, Rigidbody2D rb, bool wallJump)
 	{
 		if (moveLeft)
 		{
@@ -14,7 +15,7 @@ public static class Movement
 			if (rb.velocity.x < maxSpeed)
 				rb.AddForce(Vector2.right * acceleration * Time.fixedDeltaTime * (rb.velocity.x < 0 ? turnSpeed : 1));
 		}
-		if (moveJump && (rb.velocity.y == 0 || PlayerCollision.instance.inCollision))
+		if (moveJump && (rb.velocity.y == 0 || PlayerCollision.instance.inCollision || wallJump))
 		{
 			rb.AddForce(Vector2.up * jumpPower);
 			PlayerCollision.instance.inCollision = false;
