@@ -20,4 +20,11 @@ public class wallJumpDetect : MonoBehaviour {
 			wall = null;
 		}
 	}
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if(collision.collider.gameObject == wall)
+		{
+			GetComponent<playerMovement>().startTimer();
+		}
+	}
 }

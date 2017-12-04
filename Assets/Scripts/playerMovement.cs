@@ -7,6 +7,7 @@ public class playerMovement : MonoBehaviour
 
 	Rigidbody2D rb;
 
+	public int playerNumber;
 	public float acceleration = 1f;
 	public float maxSpeed = 10f;
 	public float wJumpTimeLimit = 0.1f;
@@ -17,7 +18,7 @@ public class playerMovement : MonoBehaviour
 	public string leftKey;
 	public string rightKey;
 	public string jumpKey;
-
+	private bool wTimerOn = false;
 	private GameObject wall = null;
 	private bool moveLeft;
 	private bool moveRight;
@@ -43,7 +44,11 @@ public class playerMovement : MonoBehaviour
 
 		if (wallJump)
 		{
-			wJumpTimer -= Time.deltaTime;
+
+			if (wTimerOn)
+			{
+				wJumpTimer -= Time.deltaTime; 
+			}
 			wallJump = (wJumpTimer <= 0 ? false : true);
 			
 		}
@@ -92,7 +97,10 @@ public class playerMovement : MonoBehaviour
 
 		if (rb.position.y < -5)
 		{
-			PlaySessionManager.ins.RoundOver(2);
+			if (playerNumber == 1)
+				PlaySessionManager.ins.RoundOver(2);
+			else if (playerNumber == 2)
+				PlaySessionManager.ins.RoundOver(1);
 		}
 
 	}
@@ -103,8 +111,13 @@ public class playerMovement : MonoBehaviour
 		wallJump = true;
 		wJumpTimer = wJumpTimeLimit;
 		wall = _wall;
+		wTimerOn = false;
 	}
 
+	public void startTimer()
+	{
+		wTimerOn = true;
+	}
 
 
 
