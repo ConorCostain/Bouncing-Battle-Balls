@@ -14,6 +14,8 @@ public class PlaySessionManager : MonoBehaviour {
 	private TMP_Text player2Text;
 	private int player1Score = 0;
 	private int player2Score = 0;
+	private int shuffleCount = 0;
+	private List<string> levels;
 
 	// Singleton Pattern, OnSceneLoad Method Added
 	private void Awake()
@@ -114,27 +116,54 @@ public class PlaySessionManager : MonoBehaviour {
 	}
 	private string GetRandomLevel()
 	{
-		int amountOfScenes = SceneManager.sceneCountInBuildSettings;
-		List<string> levels = new List<string>();
-		string temp;
-		
-		for(int i = 0; i < amountOfScenes; i++)
+		if (levels == null)
 		{
-			temp = System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i));
-			if (temp.Contains("Level"))
+			levels = new List<string>();
+			int amountOfScenes = SceneManager.sceneCountInBuildSettings;
+
+			string temp;
+
+			for (int i = 0; i < amountOfScenes; i++)
 			{
-				levels.Add(temp);
+				temp = System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i));
+				if (temp.Contains("Level"))
+				{
+					levels.Add(temp);
+				}
 			}
+
+			if (levels.Count == 0)
+			{
+				return SceneManager.GetActiveScene().name;
+			} 
 		}
 
-		if(levels.Count == 0)
+		if(shuffleCount == 0)
 		{
-			return SceneManager.GetActiveScene().name;
+			listShuffle<string>(ref levels);
+			
 		}
+		else if (shuffleCount >= levels.Count)
+		{
+			shuffleCount = 0;
+		}
+		
 
-		int buildIndex = (int)Random.Range(0, levels.Count);
+		return levels[shuffleCount++];
+	}
 
-		return levels[buildIndex];
+	private void listShuffle<T>(ref List<T> list)
+	{
+		T temp;
+		int randomNum;
+		for (int i = 0; i < list.Count; i++)
+		{
+			temp = list[i];
+			randomNum = (int)Random.Range(0, list.Count - 1);
+			list[i] = list[randomNum];
+			list[randomNum] = temp;
+		}
+		return;
 	}
 
 
