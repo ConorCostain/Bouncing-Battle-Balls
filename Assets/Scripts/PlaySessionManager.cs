@@ -8,6 +8,9 @@ public class PlaySessionManager : MonoBehaviour {
 
 	public static PlaySessionManager ins;
 	public Color[] colourPallete;
+
+	public GameObject player1;
+	public GameObject player2;
 	private static bool randomLevels = false;
 	private static bool roundOver = false;
 	private TMP_Text player1Text;
@@ -43,6 +46,13 @@ public class PlaySessionManager : MonoBehaviour {
 			// Reset Round Over bool
 			roundOver = false;
 
+			//Spawn Players
+
+			if (StartPosistionFinder.startPos != null)
+			{
+				Instantiate(player1, StartPosistionFinder.startPos[0]);
+				Instantiate(player2, StartPosistionFinder.startPos[1]); 
+			}
 			//Player Score System
 
 			TMP_Text[] scores = FindObjectsOfType<TMP_Text>();
